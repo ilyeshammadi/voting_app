@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  if (!user)
+    a(href="/users/login") Login
+    br
+    a(href="/users/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/users/logout") Logout
+
+  <div ng-app="Voting">
+    <div ng-view></div>
+  </div>
