@@ -1,0 +1,15 @@
+.polls-container {
+  width: 600px;
+}
+
+.votes {
+  float: right;
+}
+
+.poll-item > button {
+  margin-right: 15px;
+}
+
+.polls-title {
+  font-size: 24px;
+}

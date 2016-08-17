@@ -25,6 +25,10 @@ app.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$resourc
             templateUrl: '/partials/list.html',
             controller: 'ListPollsController'
         })
+        .when('/:id', {
+            templateUrl: '/partials/detail.html',
+            controller: 'PollDetailController'
+        })
         .otherwise('/');
 
 }]);
