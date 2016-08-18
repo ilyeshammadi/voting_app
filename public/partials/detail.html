@@ -13,6 +13,9 @@
               <span class="votes badge">{{ c.votes }}</span>
           </li>
         </ul>
+        <a href="http://twitter.com/home?status=Vote!%20http://{{ host }}%2F%23%2F{{ poll._id }}" title="Share on Twitter" target="_blank" class="btn btn-twitter">
+          <i class="fa fa-twitter"></i><span> Tweet</span>
+        </a>
       </div>
       <div class="col-xs-6">
         <canvas id="chart{{ poll._id }}" width="300" height="300"></canvas>
@@ -20,7 +23,7 @@
     </div>
     <div class="poll-actions">
       <a href="#/update/{{ poll._id }}" class="btn btn-primary" ng-show="poll.is_owner">Edit</a>
-      <button class="btn btn-danger" ng-show="poll.is_owner" ng-click="remove()">Delete</button>
+      <a class="btn btn-danger" ng-show="poll.is_owner" ng-click="remove()">Delete</a>
     </div>
   </div>
 </div>

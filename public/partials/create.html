@@ -6,6 +6,8 @@
         ng-model='poll.title'>
       <span>Poll options</span>
       <div class="options">
+        <input  class="form-control option" type="text" placeholder="Choice title">
+        <input  class="form-control option" type="text" placeholder="Choice title">
         <button id="add-option" class="btn btn-default">Add option</button>
         <button class="btn btn-default" ng-click="savePoll()">Save</button>
       </div>
@@ -13,10 +15,8 @@
   </div>
 
   <script type="text/javascript">
-    var count = 0;
     $('#add-option').click(function () {
-      $('#add-option').before('<input id="'+ count + '" class="form-control option" type="text" placeholder="Choice title">')
-      count++;
+      $('#add-option').before('<input  class="form-control option" type="text" placeholder="Choice title">')
     })
 
 

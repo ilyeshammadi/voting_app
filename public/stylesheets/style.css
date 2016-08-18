@@ -43,3 +43,14 @@ canvas {
 .poll-actions {
   float: right;
 }
+
+button {
+  margin: 8px
+}
+
+.btn-twitter {
+    background: #00acee;
+    border-radius: 0;
+    color: #fff;
+    margin-bottom: 24px;
+}

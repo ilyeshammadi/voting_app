@@ -118,6 +118,7 @@ router.get('/:id', (req, res) => {
   Update Poll
 */
 router.post('/update/:id', (req, res) => {
+  if(!req.user) return;
   Poll.findOne({_id : req.params.id}, (err, poll) => {
     // Update is authorized by the user who created the poll
     if (String(poll.user_id) !== String(req.user._id)) return res.json({messsage : 'you are not authorized to edit this poll'})
@@ -134,6 +135,8 @@ router.post('/update/:id', (req, res) => {
   Delte Poll
 */
 router.post('/delete/:id', (req, res) => {
+  if(!req.user) return;
+
   Poll.findOne({_id : req.params.id}, (err, poll) => {
     // Delete is authorized by the user who created the poll
     if (String(poll.user_id) !== String(req.user._id)) return res.json({messsage : 'you are not authorized to edit this poll'})
@@ -157,16 +160,35 @@ router.post('/vote/:id', (req, res) => {
   Poll.findOne({_id : poll_id}, (err, poll) => {
     if (err) return;
     console.log('1');
-    if (String(req.user._id) === String(poll.user_id)) return;
-    console.log('2');
-    // If the voter is the user who created the poll, return
-    if(req.user == poll.user_id) return;
+
+    if(req.user){
+      if (String(req.user._id) === String(poll.user_id)) return;
+      console.log('2');
+      // If the voter is the user who created the poll, return
+      if(req.user == poll.user_id) return;
+    }
+
+
     console.log('3');
     for(var i=0; i<poll.choices.length; i++){
+      if(req.user){
+        // If the user has not voted before
+        if(!isInArray(poll.voters, req.user._id)){
+          console.log('4');
+          // If the param choice is in the poll choices
+          if((poll.choices[i]._id + "") === choice_id){
+            console.log('5');
 
-      // If the user has not voted before
-      if(!isInArray(poll.voters, req.user._id)){
-        console.log('4');
+            // Add the user to the voters list
+            poll.voters.push(req.user);
+
+            // Increment the voter by one
+            poll.choices[i].votes++;
+            poll.save();
+            return res.status(200).end();
+          }
+        }
+      }else {
         // If the param choice is in the poll choices
         if((poll.choices[i]._id + "") === choice_id){
           console.log('5');

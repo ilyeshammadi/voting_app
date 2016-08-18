@@ -14,8 +14,11 @@
                   <span class="votes badge">{{ c.votes }}</span>
               </li>
             </ul>
+            <a href="http://twitter.com/home?status=Vote!%20http://{{ host }}%2F%23%2F{{ p._id }}" title="Share on Twitter" target="_blank" class="btn btn-twitter">
+              <i class="fa fa-twitter"></i><span> Tweet</span>
+            </a>
           </div>
-          <div class="cols-xs-6" ng-show="p.has_vote">
+          <div class="cols-xs-6">
             <canvas id="chart{{ p._id }}"></canvas>
           </div>
         </div>

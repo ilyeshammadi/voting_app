@@ -1,6 +1,6 @@
 app.controller('ListPollsController', function($scope, $http){
   $scope.polls = [];
-
+  $scope.host = window.location.host;
   $http.get('/polls/').success(function (res) {
     $scope.polls = res;
     for(i in $scope.polls){
@@ -29,6 +29,7 @@ app.controller('ListPollsController', function($scope, $http){
 
 app.controller('PollDetailController', function($scope, $http, $routeParams){
   $scope.poll = {};
+  $scope.host = window.location.host;
   $http.get('/polls/' + $routeParams.id).success(function (res) {
     $scope.poll = res;
     initChart($scope.poll, 'bar');
