@@ -4,13 +4,20 @@
     <a class="polls-title" href="#/{{ poll._id }}">
       {{ poll.title }}
     </a>
-    <ul class="list-group">
-      <li class="list-group-item poll-item" ng-repeat="c in poll.choices">
-          <button class="btn btn-default" ng-show="poll.can_vote" ng-click="vote($index)">Vote</button>
-          <span>{{ c.title }}</span>
-          <span class="votes badge">{{ c.votes }}</span>
-      </li>
-    </ul>
-  </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <ul class="list-group">
+          <li class="list-group-item poll-item" ng-repeat="c in poll.choices">
+              <button class="btn btn-default" ng-show="poll.can_vote" ng-click="vote($index)">Vote</button>
+              <span>{{ c.title }}</span>
+              <span class="votes badge">{{ c.votes }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-6">
+        <canvas id="chart{{ poll._id }}" width="300" height="300"></canvas>
+      </div>
+    </div>
 
+  </div>
 </div>

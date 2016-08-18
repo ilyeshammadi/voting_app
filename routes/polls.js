@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
         polls[i].can_vote = false;
       }
     }
-    res.json(polls)
+    return res.json(polls)
   })
 
 })
@@ -47,7 +47,7 @@ router.post('/create', (req, res) => {
 
   // Not able to create poll if not logged in
   if(!req.user) {
-    res.status(400).json({message : 'you must be logged in to create a poll'})
+    return res.status(400).json({message : 'you must be logged in to create a poll'})
   }
 
   // Get the data
@@ -73,7 +73,7 @@ router.post('/create', (req, res) => {
   poll.save();
 
   // Return the created poll
-  res.json(poll);
+  return res.json(poll);
 })
 
 /**
@@ -94,14 +94,14 @@ router.get('/:id', (req, res) => {
 
       // If the user is the poll creater
       if (String(poll.user_id) === String(req.user._id)){
-        polls.can_vote = false;
+        poll.can_vote = false;
       }
     }else {
       poll.can_vote = false;
     }
 
     // If not error, return the poll data
-    res.json(poll)
+    return res.json(poll)
   })
 })
 
@@ -140,19 +140,20 @@ router.post('/vote/:id', (req, res) => {
 
   Poll.findOne({_id : poll_id}, (err, poll) => {
     if (err) return;
-
+    console.log('1');
     if (String(req.user._id) === String(poll.user_id)) return;
-
+    console.log('2');
     // If the voter is the user who created the poll, return
     if(req.user == poll.user_id) return;
-
+    console.log('3');
     for(var i=0; i<poll.choices.length; i++){
 
       // If the user has not voted before
       if(!isInArray(poll.voters, req.user._id)){
-
+        console.log('4');
         // If the param choice is in the poll choices
         if((poll.choices[i]._id + "") === choice_id){
+          console.log('5');
 
           // Add the user to the voters list
           poll.voters.push(req.user);
@@ -161,11 +162,7 @@ router.post('/vote/:id', (req, res) => {
           poll.choices[i].votes++;
           poll.save();
           return res.status(200).end();
-        }else {
-          return res.status(400).json({message : 'choice does not exist in the poll choices'});
         }
-      }else {
-        return res.status(400).json({message : 'you can vote only once'});
       }
     }
 

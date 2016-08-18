@@ -1,5 +1,5 @@
 .polls-container {
-  width: 600px;
+  margin: auto 15% auto 15%;
 }
 
 .votes {
@@ -12,4 +12,8 @@
 
 .polls-title {
   font-size: 24px;
+}
+
+canvas {
+  display: none;
 }
