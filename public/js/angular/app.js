@@ -25,10 +25,19 @@ app.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$resourc
             templateUrl: '/partials/list.html',
             controller: 'ListPollsController'
         })
+        .when('/create', {
+            templateUrl: '/partials/create.html',
+            controller: 'CreatePollController'
+        })
+        .when('/update/:id', {
+            templateUrl: '/partials/update.html',
+            controller: 'UpdatePollController'
+        })
         .when('/:id', {
             templateUrl: '/partials/detail.html',
             controller: 'PollDetailController'
         })
+
         .otherwise('/');
 
 }]);

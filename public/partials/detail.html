@@ -18,6 +18,9 @@
         <canvas id="chart{{ poll._id }}" width="300" height="300"></canvas>
       </div>
     </div>
-
+    <div class="poll-actions">
+      <a href="#/update/{{ poll._id }}" class="btn btn-primary" ng-show="poll.is_owner">Edit</a>
+      <button class="btn btn-danger" ng-show="poll.is_owner" ng-click="remove()">Delete</button>
+    </div>
   </div>
 </div>

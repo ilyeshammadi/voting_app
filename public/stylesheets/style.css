@@ -2,6 +2,11 @@
   margin: auto 15% auto 15%;
 }
 
+.poll-container {
+  margin: auto 30% auto 30%;
+}
+
+
 .votes {
   float: right;
 }
@@ -16,4 +21,25 @@
 
 canvas {
   display: none;
+}
+
+#create-poll span {
+  font-size: 16px;
+  margin-top: 24px
+}
+
+.options button {
+  margin-top: 15px;
+}
+
+#poll-title {
+  margin: 15px 0 15px 0;
+}
+
+.option {
+  margin: 15px 0 15px 0;
+}
+
+.poll-actions {
+  float: right;
 }

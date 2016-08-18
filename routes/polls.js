@@ -22,6 +22,14 @@ router.get('/', (req, res) => {
       // If the user is not logged in, he can not vote
       if(req.user){
 
+        // Check if a choice has a vote
+        for(var j=0; j < polls[i].choices.length; j++){
+          var temp = polls[i].choices[j];
+          if(temp.votes > 0){
+            polls[i].has_vote = true;
+          }
+        }
+
         // If the user has voted before
         if(isInArray(polls[i].voters, req.user._id)){
           polls[i].can_vote = false;
@@ -95,6 +103,7 @@ router.get('/:id', (req, res) => {
       // If the user is the poll creater
       if (String(poll.user_id) === String(req.user._id)){
         poll.can_vote = false;
+        poll.is_owner = true;
       }
     }else {
       poll.can_vote = false;
@@ -111,7 +120,7 @@ router.get('/:id', (req, res) => {
 router.post('/update/:id', (req, res) => {
   Poll.findOne({_id : req.params.id}, (err, poll) => {
     // Update is authorized by the user who created the poll
-    if (poll.user_id !== req.user._id) return res.json({messsage : 'you are not authorized to edit this poll'})
+    if (String(poll.user_id) !== String(req.user._id)) return res.json({messsage : 'you are not authorized to edit this poll'})
 
     // Get the new data
 
@@ -125,7 +134,14 @@ router.post('/update/:id', (req, res) => {
   Delte Poll
 */
 router.post('/delete/:id', (req, res) => {
-  res.json({message : 'delete poll'})
+  Poll.findOne({_id : req.params.id}, (err, poll) => {
+    // Delete is authorized by the user who created the poll
+    if (String(poll.user_id) !== String(req.user._id)) return res.json({messsage : 'you are not authorized to edit this poll'})
+
+    poll.remove();
+    res.json({message : 'delete poll'})
+
+  })
 })
 
 /**

@@ -14,7 +14,9 @@ var Poll = new Schema({
     created : {type: Date, default: Date.now},
     choices : [Choice],
     voters : [{type: Schema.Types.ObjectId, ref: 'Account', unique: true, dropDups: true}],
-    can_vote : {type: Boolean, default: true}
+    can_vote : {type: Boolean, default: true},
+    is_owner : {type: Boolean, default: false},
+    has_vote : {type: Boolean, default: false}
 });
 
 // Poll.plugin(passportLocalMongoose);

@@ -24,6 +24,8 @@ block content
               a(href="/users/register") Register
           if (user)
             li
+              a(href="#/create") New poll
+            li
               a(href="#") #{user.username}
             li
               a(href="/users/logout") Logout

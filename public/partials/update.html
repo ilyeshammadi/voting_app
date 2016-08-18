@@ -1,0 +1,23 @@
+<div id="create-poll" ng-controller="UpdatePollController">
+  <div class="container-fluid poll-container">
+    <span>Poll name</span>
+    <div class="">
+      <input id="poll-title" class="form-control" type="text" placeholder="Poll title"
+        ng-model='poll.title'>
+      <span>Poll options</span>
+      <div class="options">
+        <input class="form-control option" type="text" ng-repeat="c in poll.choices" value="{{ c.title }}">
+        <button id="add-option" class="btn btn-default">Add option</button>
+        <button class="btn btn-default" ng-click="savePoll()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var count = 0;
+    $('#add-option').click(function () {
+      $('#add-option').before('<input id="'+ count + '" class="form-control option" type="text" placeholder="Choice title">')
+      count++;
+    })
+  </script>
+</div>
