@@ -46,7 +46,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://localhost/voting_app');
+mongoose.connect('mongodb://ilyes:voting123456@ds161505.mlab.com:61505/voting');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
